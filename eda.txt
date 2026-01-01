@@ -1,0 +1,129 @@
+1. DATASET OVERVIEW
+   Rows:891
+   Columns:12
+   Target variable: Survived(0 = NO, 1 = Yes)
+
+| Feature     | Type                  | Meaning              |
+| ----------- | --------------------- | -------------------- |
+| PassengerId | Identifier            | Unique ID            |
+| Survived    | Target                | Survival status      |
+| Pclass      | Categorical (Ordinal) | Ticket class (1,2,3) |
+| Name        | Text                  | Passenger name       |
+| Sex         | Categorical           | Male/Female          |
+| Age         | Numerical             | Passenger age        |
+| SibSp       | Numerical             | Siblings/Spouses     |
+| Parch       | Numerical             | Parents/Children     |
+| Ticket      | Categorical           | Ticket number        |
+| Fare        | Numerical             | Ticket fare          |
+| Cabin       | Categorical           | Cabin number         |
+| Embarked    | Categorical           | Port of embarkation  |
+
+2. Missing value Analysis
+   Cabin -> Too many missing values(usually dropped)
+   Age -> Important Feature(impute{median or model-based})
+   Embarked -> Only 2 so filled with model
+
+3. Target variable distribution
+   From the survival count plot:
+   Not Survived:~549
+   Survived:~342
+
+   Insight
+   DATASET is slightly imbalanced so accuracy alone is not enogh, precision and recall matter
+  
+4. Numerical feature Analysis
+   Age
+   Range:0.4 - 80 years
+   Most passengers: 20 - 40 years
+   Right skewed distribution(mean>median>mode)
+
+   Key Insight
+   Children and younger passengers had higher survival probability
+
+   Fare 
+   Highly right skewed as many low fares, few very expensive tickets
+   Better if applied Log transgormation during modeling
+
+5. Categorical feature insights(critical for ML)
+   Sex:
+   Male:577
+   Female:314
+
+   Survival insights:
+   females survived significantly more than male
+   strong predictive feature
+
+   Passenger class
+   3rd class -> Most passengers
+   1st class -> Higher Survival Rate
+   Socio-economic status mattered a lot
+
+   Embarked
+   Most from southampton
+   Some missing so filled with mode
+
+6. Feature Relationships for Business Logic
+
+| Feature     | Relationship with Survival    |
+| ----------- | ----------------------------- |
+| Sex         | Females > Males               |
+| Pclass      | 1st > 2nd > 3rd               |
+| Age         | Children > Adults             |
+| Fare        | Higher fare → Higher survival |
+| Family Size | Small families survived more  |
+
+7. Data cleaning strategy 
+   Drop(PassengerId, Name, Ticket, Cabin)
+   Impute(Age, Embarked)
+   
+   Feature Engineering
+   FamilySize = SibSp + Parch + 1
+   IsAlone = 1 if FamilySize == 1 else 0
+
+1️⃣ train_test_split()
+A function from sklearn.model_selection that divides your dataset into train (for model learning) and test (for evaluation).
+Inputs: features (X) and target (y).
+Outputs: X_train, X_test, y_train, y_test.
+
+2️⃣ test_size=0.2
+20% of the data will be reserved for testing.
+80% will be used for training the model.
+
+3️⃣ random_state=42
+Ensures reproducibility.
+The split will always be the same if you use this random seed.
+Otherwise, every run could split the data differently.
+
+4️⃣ stratify=y
+Ensures that the proportion of classes in the target y is the same in both train and test sets.
+Example: If 40% survived and 60% didn’t in the original dataset, the same ratio is maintained in y_train and y_test.
+Important for imbalanced datasets like Titanic.
+
+1️⃣ Why Feature Scaling?
+Features like Age, Fare, SibSp, etc., may have very different ranges.
+Example: Age might range from 0–80, Fare from 0–500+.
+Logistic Regression (and many ML algorithms) assumes features are on a similar scale to perform efficiently.
+Without scaling:
+Large-range features dominate the optimization process.
+Model may converge slowly or give biased coefficients.
+
+2️⃣ StandardScaler()
+Standardizes features to have:
+Mean = 0
+Standard deviation = 1
+Formula applied to each feature:
+𝑋scaled=( X - mean(X) ) / std(X)
+
+3️⃣ fit_transform vs transform
+X_train = scaler.fit_transform(X_train)
+fit_transform() does two things on training data:
+Fit: Computes the mean and standard deviation of each feature in X_train.
+Transform: Scales X_train using the computed mean & std.
+
+X_test = scaler.transform(X_test)
+Only transform X_test using the mean and std from X_train.
+✅ Important: Do NOT fit on test data, otherwise you leak information from the test set.
+
+4️⃣ Effect
+All features are now on the same scale, making the model training more stable and improving convergence.
+Logistic Regression coefficients now reflect true relationships between features and the target.

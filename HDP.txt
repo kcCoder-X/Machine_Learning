@@ -1,0 +1,161 @@
+FBS refers to Fasting Blood Sugar
+Fasting blood sugar (FBS) measures glucose in your blood after an overnight fast (8-12 hours) to check for diabetes or prediabetes, with normal levels below 100 mg/dL; 100-125 mg/dL suggests prediabetes; and 126 mg/dL or higher indicates diabetes, helping assess how your body manages sugar and identifying risks like heart or nerve damage
+Elevated fasting blood sugar is a risk factor for cardiovascular disease because:
+It indicates impaired glucose metabolism or diabetes
+Diabetes significantly increases the risk of heart disease and heart attacks
+High blood sugar can damage blood vessels and nerves that control the heart
+
+In Heart Disease Datasets
+Resting blood pressure (usually systolic) is a key predictor variable. Higher BP values correlate with increased heart disease risk.
+Typical BP ranges in analysis:
+Low risk: <120 mmHg
+Moderate: 120-140 mmHg
+High risk: >140 mmHg
+
+Key Cholesterol Levels (General Guidelines)
+Total Cholesterol:
+Desirable: <200 mg/dL
+Borderline high: 200-239 mg/dL
+High: ≥240 mg/dL
+LDL{Low Density Lipoprotein} ("Bad"): Below 100 mg/dL (2.6 mmol/L); lower is better, especially with heart disease (under 70 mg/dL).
+HDL ("Good"): 60 mg/dL (1.5 mmol/L) or higher is ideal; below 40 mg/dL (men) or 50 mg/dL (women) is low.
+Triglycerides: Below 150 mg/dL (1.7 mmol/L). 
+
+EKG (Electrocardiogram) Results in Heart Disease
+An EKG/ECG (Electrocardiogram) records the electrical activity of your heart and can reveal abnormalities that indicate heart disease or increased risk.
+Common EKG Categories in Heart Disease Datasets
+Most heart disease datasets classify resting EKG results into 3 categories:
+0 = Normal
+No abnormalities detected
+Regular rhythm and normal wave patterns
+
+1 = ST-T Wave Abnormality
+Changes in the ST segment or T wave
+Can indicate:
+Ischemia (reduced blood flow to heart)
+Previous heart attack
+Electrolyte imbalances
+Medication effects
+Ranges from mild to concerning
+
+2 = Left Ventricular Hypertrophy (LVH)
+Thickening of the heart's left ventricle wall
+Usually caused by:
+High blood pressure (most common)
+Heart valve disease
+Cardiomyopathy
+Indicates the heart is working harder than normal
+Strong predictor of heart disease and complications
+
+maximum heart rate (MHR) is the highest number of beats per minute (bpm) your heart can achieve during intense exertion, often estimated by subtracting your age from 220 (e.g., 220 - age), but more accurate formulas like 211 - (0.64 x age) exist, with real testing being the best method, all used to set target heart rate zones for exercise. 
+
+Exercise angina refers to chest pain or discomfort that occurs during physical activity and is a key symptom of coronary artery disease.
+In Heart Disease Datasets
+Exercise angina is typically coded as binary:
+1 (Yes): Patient experiences chest pain during exercise
+0 (No): No chest pain during exercise
+
+ST depression refers to a specific abnormality seen on an EKG (electrocardiogram) that indicates the heart muscle is not getting enough oxygen (ischemia). It's a critical marker for coronary artery disease.
+Severity levels:
+Mild: 0.5-1.0 mm depression
+Moderate: 1.0-2.0 mm depression
+Severe: >2.0 mm depression
+
+The ST slope refers to the angle or direction of the ST segment on an EKG during exercise stress testing as it moves from the S wave toward the T wave:
+Measured during peak exercise or recovery
+Describes the geometric pattern of ST changes
+Helps distinguish between normal and abnormal responses
+
+In Heart Disease Datasets
+Typical Encoding:
+1 = Upsloping (best prognosis)
+2 = Flat (intermediate)
+3 = Downsloping (worst prognosis)
+
+The "Number of major vessels (0–3) colored by fluoroscopy" is an indicator of the severity and extent of coronary artery disease (CAD). A higher number is strongly correlated with an increased probability of having significant heart disease and a worse prognosis. 
+In Heart Disease Datasets
+Typical Values:
+0 = No significant blockages
+1 = Single-vessel disease
+2 = Double-vessel disease
+3 = Triple-vessel disease
+
+Ischemia is a serious condition where blood flow and oxygen are restricted to a part of the body.
+CAD, or Coronary Artery Disease, is the most common type of heart disease where plaque (cholesterol, fats) builds up in the heart's arteries (atherosclerosis), narrowing them and restricting blood/oxygen flow, causing chest pain (angina), shortness of breath, or heart attack, and is managed with lifestyle changes, meds, and procedures.
+
+Thallium (specifically Thallium-201) is primarily related to heart disease through its use in the Thallium Stress Test, a nuclear imaging test that shows how well blood flows to your heart muscle during rest and exercise, helping diagnose Coronary Artery Disease (CAD), identify blockages, assess damage, and predict cardiac risk before surgery or after a heart attack.
+Procedure:
+Radioactive thallium-201 injected into bloodstream
+Patient exercises (or given medication to simulate exercise)
+Thallium travels through blood to heart muscle
+Special camera (gamma camera) takes pictures
+Shows which areas of heart receive adequate blood flow
+
+
+Types of Thallium Defects
+In heart disease datasets, thallium results are typically categorized:
+1. Normal (Value: 3 or "Normal")
+2. Fixed Defect (Value: 6 or "Fixed")
+3. Reversible Defect (Value: 7 or "Reversible")
+
+Clinical Hierarchy
+From Best to Worst:
+Normal → No CAD, excellent prognosis
+Fixed defect → Prior damage, stable but permanent
+Reversible defect → Active ischemia, highest risk, needs treatment
+
+A prognosis is a medical prediction of the likely course and outcome of a disease or injury, estimating factors like recovery potential, complications, quality of life, and survival, based on the diagnosis, patient factors, and treatments. It's an educated forecast, not a certainty, helping patients and doctors plan for the future, and it can change as the condition evolves. 
+
+chest pain type
+TypeCAD        Probability  Characteristics         Action
+Typical Angina(1)  70-90%    All 3 criteria met  Urgent cardiac workup
+Atypical Angina(2) 30-50%     2 of 3 criteria     Cardiology evaluation
+Non-Anginal(3)    10-20%      0-1 criteria     Consider non-cardiac cause
+Asymptomatic(4)   Variable     No pain          Risk-based testing
+
+Combined Risk Assessment
+Highest Risk Profile:
+Chest pain type: Typical Angina
+Exercise angina: YES
+ST depression: >2.0 mm
+Downsloping ST
+Low max HR
+3 vessels on angiography
+→ 95-99% probability of significant CAD
+
+Moderate Risk Profile:
+Chest pain type: Atypical Angina
+Exercise angina: NO
+ST depression: 1.0-2.0 mm
+Flat ST slope
+Moderate max HR
+→ 40-60% probability
+
+Low Risk Profile:
+Chest pain type: Non-Anginal or Asymptomatic
+Exercise angina: NO
+ST depression: <1.0 mm or none
+Upsloping ST
+Good max HR
+→ 5-15% probability
+
+🏆 Tier 1: Strongest Predictors (Very High Importance)
+Number of vessels fluro
+Chest pain type
+Thallium
+ST depression
+Exercise angina
+
+📊 Tier 2: Strong Predictors (High Importance)
+Slope of ST
+Max HR
+Age
+Sex
+
+📈 Tier 3: Moderate Predictors (Moderate Importance)
+EKG results
+Cholesterol
+BP
+
+📉 Tier 4: Weaker Predictors (Lower Importance)
+FBS over 120
